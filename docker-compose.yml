@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  infinityx:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./workspace:/workspace
+    environment:
+      - ENABLE_VERTEX=true
+      - ENABLE_GROQ=true
+      - ENABLE_MCP=true
