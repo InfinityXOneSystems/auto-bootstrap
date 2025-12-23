@@ -1,1 +1,2 @@
-def run(task): return {'engine':'groq','ok':True}
+def run(task):
+    return {"engine": "groq", "ok": True}

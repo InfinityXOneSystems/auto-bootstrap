@@ -1,1 +1,2 @@
-def run(task): return {'engine':'mcp','ok':True}
+def run(task):
+    return {"engine": "mcp", "ok": True}
