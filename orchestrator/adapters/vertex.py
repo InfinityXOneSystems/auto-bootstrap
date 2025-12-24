@@ -1,1 +1,2 @@
-def run(task): return {'engine':'vertex','ok':True}
+def run(task):
+    return {"engine": "vertex", "ok": True}
