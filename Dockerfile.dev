@@ -1,0 +1,22 @@
+# Development Dockerfile with hot reload
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install all dependencies (including dev)
+RUN npm install
+
+# Copy source code
+COPY src ./src
+COPY config ./config
+COPY schemas ./schemas
+
+# Expose port
+EXPOSE 3000
+
+# Run with tsx watch for hot reload
+CMD ["npx", "tsx", "watch", "src/server/index.ts"]

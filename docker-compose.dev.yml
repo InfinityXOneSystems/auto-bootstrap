@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  index-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: infinity-agents-dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      # Mount source for hot reload
+      - ./src:/app/src:ro
+      - ./config:/app/config:ro
+      - ./schemas:/app/schemas:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+    command: npx tsx watch src/server/index.ts
+    networks:
+      - infinity-network
+
+networks:
+  infinity-network:
+    driver: bridge

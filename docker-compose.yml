@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.9'
 services:
   infinityx:
@@ -10,3 +11,35 @@ services:
       - ENABLE_VERTEX=true
       - ENABLE_GROQ=true
       - ENABLE_MCP=true
+=======
+version: '3.8'
+
+services:
+  index:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: infinity-agents
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # Mount config as read-only
+      - ./config:/app/config:ro
+      - ./schemas:/app/schemas:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks:
+      - infinity-network
+
+networks:
+  infinity-network:
+    driver: bridge
+>>>>>>> feature/agents-service
